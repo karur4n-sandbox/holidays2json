@@ -14,12 +14,13 @@ source.each do |row|
 
   date = row[0]
 
-  date_hash = {"#{date.year}": "#{date.month}#{date.day}"}
+  value = date.month.to_s.rjust(2, '0') + date.day.to_s.rjust(2, '0')
 
-  if output[name]
-    output[name] << date_hash
+  if output[name].nil?
+    output[name] = {}
+    output[name]["#{date.year}"] = value
   else
-    output[name] = [date_hash]
+    output[name]["#{date.year}"] = value
   end
 end
 
